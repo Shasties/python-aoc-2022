@@ -40,9 +40,34 @@ def part2():
                 counter = 0
     print("Part Two: ", sum)
 
+# Parts One and Two as they would be in one function
+def allTogetherNow():
+    sum1,sum2,counter = 0,0,0
+    temp = []
+    with open("input.txt") as f:
+        for line in f:
+            line = line.split()[0]
+            temp.append(set(line))
+            comp1 = set(line[:len(line)//2])
+            comp2 = set(line[len(line)//2:])
+            common = list(comp1 & comp2)[0]
+            sum1 += getVal(common)
+            counter += 1
+            if counter == 3:
+                common = temp[0]
+                for l in temp:
+                    common = common & l
+                common = list(common)[0]
+                sum2 += getVal(common)
+                temp = []
+                counter = 0
+    print("Part One: ", sum1)
+    print("Part Two: ", sum2)
+
 def main():
-    part1()
-    part2()
+    #part1()
+    #part2()
+    allTogetherNow()
 
 if __name__ == "__main__":
     main()
